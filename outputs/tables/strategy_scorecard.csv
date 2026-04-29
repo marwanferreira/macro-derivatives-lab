@@ -2,4 +2,5 @@ strategy,signal_strength,macro_clarity,execution_ease,pricing_attractiveness,rep
 WTI Call Spread,8.0,9.0,8.5,8.5,9.0,8.7,8.616666666666667
 Silver Call Spread,7.5,7.5,8.0,8.0,8.0,7.8,7.8
 Treasury Straddle,6.5,7.0,6.0,6.0,8.0,6.5,6.666666666666667
+Treasury Butterfly,5.5,7.5,5.5,5.5,8.5,6.0,6.416666666666667
 Gold/Silver Ratio,4.5,6.0,8.0,5.0,7.0,5.5,6.0
