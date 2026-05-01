@@ -1,0 +1,84 @@
+WTI Call Spread Trade Timeline
+Strategy: WTI Bull Call Spread
+Product: WTI Crude Oil June 2026 Options (CLE6)
+Underlying: CLM6
+
+Structure executed:
+- Long 1 June 2026 104.5 Call
+- Short 1 June 2026 106.0 Call
+
+Initial trade thesis:
+This trade was selected as the strongest candidate from the pre-trade research process. Among the five strategies tested, the WTI call spread showed the best combination of macro clarity, pricing attractiveness, and execution feasibility. The core thesis was that oil remained the clearest live macro theme, with geopolitical and supply-related factors supporting upside risk in WTI. A bull call spread was preferred over outright futures or a naked long call because it provided a defined-risk bullish expression with a realistic breakeven and controlled downside.
+
+Approximate timeline based on screenshots and trade history:
+- 29 Apr 2026, around 23:42 to 23:44:
+  First leg prepared and executed:
+  Buy 1 June 2026 104.5 Call at 6.88
+
+- 29 Apr 2026, around 23:47 to 23:49:
+  Second leg prepared and executed:
+  Sell 1 June 2026 106.0 Call at 6.22
+
+- After both legs were filled, the spread was fully established.
+  Net debit approximately:
+  6.88 - 6.22 = 0.66
+
+- 30 Apr 2026, around 00:01:
+  Unrealized PnL showed approximately +440.
+  At this stage, the spread appeared to be working and the underlying remained supportive.
+
+- 30 Apr 2026, around 00:24:
+  Unrealized PnL dropped to around -300.
+  This was a first clear sign that the mark-to-market of the spread was unstable and that the simulator’s options pricing could move sharply.
+
+- 30 Apr 2026, around 00:27:
+  CLM6 chart was checked directly.
+  Underlying was still around 104.9, so the chart did not suggest a panic exit.
+  At that point, the spread still looked structurally okay based on the underlying, despite noisy option marks.
+
+- 30 Apr 2026, around 09:02:
+  Net unrealized PnL was roughly +30.
+  Individual option legs showed very large opposite PnLs, but the combined spread was nearly flat.
+  This highlighted that single-leg option PnL was not useful on its own and that only the spread net mattered.
+
+- 30 Apr 2026, around 11:49:
+  Unrealized PnL showed around +850.
+
+- 30 Apr 2026, around 11:51:
+  Unrealized PnL showed around +980.
+  This was the highest observed unrealized profit from the available screenshots.
+  However, this number was based on simulator marks, not guaranteed executable spread value.
+
+- 30 Apr 2026, around 11:55:
+  Position was flattened.
+  The realized result shown by the platform after exit was approximately -30 overall.
+
+- 30 Apr 2026, around 11:56:
+  Trade history confirmed the actual exit fills:
+  Long 104.5 Call:
+    Bought at 6.88
+    Sold at 8.75
+    Approximate gain: +1.87 points = +$1,870
+
+  Short 106.0 Call:
+    Sold at 6.22
+    Bought back at 8.12
+    Approximate loss: -1.90 points = -$1,900
+
+  Net realized result:
+    +1,870 - 1,900 = -30
+
+What went wrong:
+The main issue was not the initial trade idea. The strategy thesis and structure selection were reasonable. The main problem was the divergence between unrealized marked PnL and executable realized PnL. The simulator displayed very strong unrealized gains at one point, but those gains were not actually locked in when the spread was exited.
+
+The key execution problem was:
+- option spread marks on the platform were misleading
+- the unrealized PnL overstated what could be captured in practice
+- the exit was effectively realized leg-by-leg in a way that introduced severe slippage
+- the short call re-priced heavily against the position at exit, offsetting the gain on the long call
+
+Main lesson learned:
+For multi-leg option strategies, especially in a simulator with noisy marks and delayed quotes, unrealized spread PnL should not be treated as realizable profit. The actual executable net value of the spread matters much more than marked profit shown on the screen. In future trades, exits should be managed using actual bid/ask checks and, where possible, limit-based spread exits rather than blindly flattening after seeing a favorable unrealized PnL.
+
+Final conclusion:
+The trade thesis and initial structure selection were reasonable, but the realized outcome differed sharply from peak unrealized PnL because the simulator’s option pricing and leg-by-leg exit execution introduced significant slippage. This made the trade a useful case study in execution risk, spread management, and the difference between theoretical and realizable profit.

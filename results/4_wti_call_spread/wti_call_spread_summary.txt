@@ -1,0 +1,20 @@
+WTI Bull Call Spread Summary
+
+Trade:
+- Long 1 CLE6 104.5 Call @ 6.88
+- Short 1 CLE6 106.0 Call @ 6.22
+
+Initial view:
+Bullish on WTI crude oil through a defined-risk call spread.
+
+Reason chosen:
+Best overall candidate from pre-trade research.
+
+Peak unrealized PnL observed:
+Approximately +980
+
+Final realized PnL:
+Approximately -30
+
+Main lesson:
+Unrealized option spread PnL in the simulator was not a reliable guide to executable value. Exit mechanics and slippage dominated the final realized result.
