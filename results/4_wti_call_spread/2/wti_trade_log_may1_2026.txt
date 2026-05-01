@@ -1,0 +1,86 @@
+WTI Bull Call Spread Trade Log
+Account: Existing CME simulator account
+Date: 01 May 2026 (CDT platform time)
+Underlying: CLM6
+Option product: CLE6
+Strategy: Bull Call Spread
+
+Target structure:
+- Long 105 Call
+- Short 108 Call
+
+Context:
+This trade was entered after rerunning the strategy notebooks. WTI remained the strongest setup among the five candidate strategies. The updated notebook still showed that a 105/108 bull call spread looked attractively priced relative to recent one-day and five-day realized WTI moves. The goal was to express a bullish oil view with defined risk and meaningful upside while avoiding the execution mistakes made in the previous WTI attempt.
+
+Execution timeline:
+1. Initial long leg entered
+   - Order: Buy 7 CLE6 105 Calls
+   - Order type: Limit
+   - Fill price: 7.31
+   - Status: Filled
+   - Approximate gross premium paid: 7.31 x 1000 x 7 = 51,170 USD
+
+2. Attempt to complete 7-lot spread
+   - Intended second leg: Sell 7 CLE6 108 Calls
+   - Attempted price: around 6.02
+   - Result: Rejected by platform margin logic
+   - Reason: the simulator treated the short call order as requiring too much additional portfolio margin and did not recognize the intended offset cleanly enough
+
+3. Position adjustment after rejection
+   - To reduce the oversized naked long exposure, 2 of the long 105 Calls were sold back
+   - Order: Sell 2 CLE6 105 Calls
+   - Order type: Limit
+   - Fill price: 7.26
+   - Status: Filled
+   - Realized loss on this cleanup:
+     Entry = 7.31
+     Exit = 7.26
+     Difference = -0.05 points per contract
+     Approximate realized loss = -0.05 x 1000 x 2 = -100 USD
+
+4. Revised spread completion
+   - New target structure: 5-lot spread instead of 7-lot spread
+   - Order: Sell 5 CLE6 108 Calls
+   - Order type: Limit
+   - Fill price: 6.02
+   - Status: Filled
+
+Final live position established:
+- Long 5 CLE6 105 Calls
+- Short 5 CLE6 108 Calls
+
+Effective economics of the final 5-lot spread:
+- Long leg average entry: 7.31
+- Short leg average entry: 6.02
+- Net debit per spread: 7.31 - 6.02 = 1.29
+- Spread width: 3.00
+- Approximate max loss:
+  1.29 x 1000 x 5 = 6,450 USD
+- Approximate max profit:
+  (3.00 - 1.29) x 1000 x 5 = 8,550 USD
+- Approximate breakeven at expiry:
+  105.00 + 1.29 = 106.29
+
+Position state shortly after entry:
+- Positions screen showed:
+  - Long 5 105 Calls with unrealized around +700 USD
+  - Short 5 108 Calls with unrealized around +100 USD
+  - Realized P/L from cleanup sale of 2 long calls: -100 USD
+- Top bar account P/L was around +700 USD at the screenshot time
+
+What went wrong during entry:
+The main issue was not the market thesis but the platform’s margin handling. The original intention was to put on 7 spreads, but the simulator rejected the short 108 Call leg for size 7, then also rejected size 6 and size 5 in one path, before a later clean 5-lot sequence was successfully entered after reducing the long-call position. This showed that the simulator does not always margin option spreads cleanly when entered leg by leg at larger size.
+
+Why the trade was resized:
+The trade was originally meant to be larger in order to generate meaningful PnL, but the platform forced a reduction because the short call leg could not be entered at the intended size under the simulator margin rules. Resizing the structure to 5 spreads was the cleanest way to restore the intended bull call spread profile while avoiding an excessively large naked long-call exposure.
+
+Main lesson from this trade so far:
+The execution problem here was not slippage at exit, but rather platform implementation and margin recognition during entry. Even when the economic structure is a defined-risk spread, the simulator may reject the short option leg if the position is built leg by leg at too large a size. In practice, this means execution size must be adapted to the simulator’s margin mechanics, not just to the theoretical risk of the strategy.
+
+Summary:
+- Best idea from updated research: WTI bull call spread
+- Initial intended size: 7 spreads
+- Platform rejected the short-call leg on margin grounds
+- Position was repaired and resized
+- Final live position: 5 x 105/108 WTI call spreads
+- Current trade status after entry snapshot: modest unrealized gain, trade live, no exit yet
