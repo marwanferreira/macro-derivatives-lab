@@ -1,0 +1,92 @@
+Silver Bull Call Spread Trade Log
+Account: New CME simulator account
+Date: 01 May 2026 (platform time)
+Underlying: SIN6
+Option product: SIE6
+Strategy: Bull Call Spread
+
+Target structure:
+- Long 74 Call
+- Short 77 Call
+
+Context:
+This trade was selected as the second live strategy after the WTI bull call spread. The updated notebook still indicated that the silver call spread was one of the strongest ideas on a pre-trade basis, alongside WTI. However, silver options on the simulator were visibly less liquid, with wider bid/ask spreads and many lines showing zero recent volume. This made execution slower and more fragile than on WTI.
+
+Execution timeline:
+1. Initial silver spread attempt at larger size
+   - First intention was to trade more than 1 lot, using the 74/77 call spread structure.
+   - Early attempts to build the trade at a larger size ran into simulator margin problems when trying to sell the higher-strike call leg.
+   - This showed that, just like on WTI, the simulator did not reliably recognize the intended spread margin relief when the trade was built leg by leg.
+
+2. Account reset and restart
+   - After the failed larger-size attempt, the account was reset in order to restart the silver trade cleanly.
+   - The trade was then resized to a smaller, more realistic size to increase the chance of clean execution.
+
+3. First leg entered cleanly
+   - Order: Buy 1 SIE6 Jul 74 Call
+   - Order type: Limit
+   - Fill price: 5.20
+   - Status: Filled
+
+4. Second leg entered after the first fill
+   - Order: Sell 1 SIE6 Jul 77 Call
+   - Order type: Limit
+   - Initial working price around the high 3.8x area
+   - Final fill price: 3.844
+   - Status: Filled
+
+Final live position established:
+- Long 1 SIE6 Jul 74 Call
+- Short 1 SIE6 Jul 77 Call
+
+Effective economics of the final spread:
+- Long leg entry: 5.20
+- Short leg entry: 3.844
+- Net debit per spread: 5.20 - 3.844 = 1.356
+
+Contract note:
+The simulator displayed for this silver option:
+- Contract size: 5000
+- Tick size: 0.001
+- Tick value: 5 USD
+
+Approximate payoff metrics:
+- Spread width: 77 - 74 = 3.00
+- Approximate max loss:
+  1.356 x 5000 = 6,780 USD
+- Approximate max profit:
+  (3.00 - 1.356) x 5000 = 8,220 USD
+- Approximate breakeven at expiry:
+  74.00 + 1.356 = 75.356
+
+What happened immediately after entry:
+Shortly after both legs were filled, the simulator positions screen showed very negative unrealized marks on both legs:
+- Long 74 Call: around -980 USD
+- Short 77 Call: around -860 USD
+
+This likely overstated the true economic loss because the silver options market on the simulator appeared illiquid and wide. In that environment, the platform can mark:
+- the long option against the bid
+- the short option against the ask
+
+This can make both legs appear simultaneously negative even though the actual spread exit value may be materially better than the displayed marks suggest. Therefore, the marked unrealized PnL on the positions screen should be treated cautiously and not interpreted as the true executable loss of the spread.
+
+What went wrong during entry:
+The main issue again was platform implementation rather than trade logic. Silver options were harder to execute than WTI because:
+- volume was low or zero on several lines
+- bid/ask spreads were wide
+- the simulator initially rejected larger-size attempts on margin grounds
+- execution had to be reduced to a 1-lot spread to get a clean, accepted position
+
+Why the trade was resized:
+The original silver idea was theoretically attractive, but the simulator made it impractical to scale. Resizing down to 1 lot was the cleanest way to ensure that the full spread could actually be entered without leaving an unintended naked option position.
+
+Main lesson from this trade so far:
+A strategy can look attractive in notebook analysis but still be difficult to implement if the live instrument is illiquid or if the simulator handles option spread margin poorly. In silver, the execution constraint was more severe than in WTI. This reinforces the difference between theoretical trade attractiveness and actual executable trade quality.
+
+Summary:
+- Strategy selected from updated ranking: silver bull call spread
+- Intended product: Jul silver options on futures
+- Trade ultimately entered as a 1-lot 74/77 bull call spread
+- Larger-size attempts were abandoned due to simulator margin and execution problems
+- Final live position established successfully
+- Post-entry displayed PnL looked sharply negative, but likely exaggerated by poor option marking rather than true realizable spread value
