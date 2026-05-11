@@ -1,0 +1,22 @@
+Metric,Value
+Strategy,Long 100x 0.7200 / short 200x 0.7275 / long 100x 0.7350 call butterfly
+Instrument,CME June AUD/USD options on 6A futures
+Market data source,"Yahoo Finance 6A=F, exported to CSV"
+Entry date,"04 May 2026, 10:30 Sydney"
+Exit date,"06 May 2026, 15:30 Sydney"
+"Account capital, USD","$100,000.00"
+Position size,5 call butterflies
+Entry futures price,0.72035
+Exit futures price,0.72425
+Futures move during trade,+0.00390
+Lowest futures price during trade,0.71335
+Highest futures price during trade,0.72425
+"Net debit paid, USD",$650.00
+"Maximum possible loss, USD",$650.00
+"Maximum possible profit at expiry, USD","$3,100.00"
+"Realized PnL, USD",$825.00
+Return on net debit,126.92%
+Return on account capital,0.83%
+Closest checkpoint to max-profit strike,"06 May 2026, 15:30 Sydney at 0.72425"
+Lower breakeven,0.721300
+Upper breakeven,0.733700

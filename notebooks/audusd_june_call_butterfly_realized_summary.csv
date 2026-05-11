@@ -1,0 +1,13 @@
+Metric,Value
+"Account capital, USD",100000.0
+Number of butterflies,5.0
+"Gross premium paid, USD",1750.0
+"Gross premium received, USD",1100.0
+"Net debit paid, USD",650.0
+"Maximum possible loss, USD",650.0
+"Maximum possible profit at expiry, USD",3100.000000000031
+"Realized PnL, USD",825.0
+Return on net debit,1.2692307692307692
+Return on account capital,0.00825
+Lower breakeven,0.7212999999999999
+Upper breakeven,0.7337

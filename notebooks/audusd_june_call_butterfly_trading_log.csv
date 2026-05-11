@@ -1,0 +1,7 @@
+Date / time Sydney,Date / time CDT,Action,Instrument,Position,Price
+"04 May 2026, 10:30","03 May 2026, 19:30",Entered,CME June AUD/USD option on 6A futures,Buy 5x 0.7200 call,0.0032
+"04 May 2026, 10:31","03 May 2026, 19:31",Entered,CME June AUD/USD option on 6A futures,Sell 10x 0.7275 call,0.0011
+"04 May 2026, 10:32","03 May 2026, 19:32",Entered,CME June AUD/USD option on 6A futures,Buy 5x 0.7350 call,0.0003
+"06 May 2026, 15:30","06 May 2026, 00:30",Manually closed,CME June AUD/USD option on 6A futures,Sell 5x 0.7200 call,0.0067
+"06 May 2026, 15:31","06 May 2026, 00:31",Manually closed,CME June AUD/USD option on 6A futures,Buy back 10x 0.7275 call,0.0019
+"06 May 2026, 15:32","06 May 2026, 00:32",Manually closed,CME June AUD/USD option on 6A futures,Sell 5x 0.7350 call,5e-05
